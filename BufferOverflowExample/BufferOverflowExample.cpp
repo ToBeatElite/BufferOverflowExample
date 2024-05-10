@@ -1,46 +1,39 @@
+/*
+
+visual studio project taken from here so i dont have to 
+mess with all the build configs, security settings, etc
+https://github.com/Andy53/BufferOverflowExample/tree/master
+
+*/
+
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <vector>
 #include <windows.h>
-//#include <cstring>
 
-inline bool file_exists(const std::string& name) {
-    std::ifstream f(name.c_str());
-    return f.good();
-}
+using namespace std;
+extern "C" void gadgets();
 
-void exploitable(const char* p, int len)
-{
-    //char nops[]{ 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
+
+void exploitable(const char* p, int len) {
     char buffer[700];
     memcpy(buffer, p, len);
 }
 
-int main()
-{
-    std::string inputFile = "";
-    std::string inputText = "";
+int main() {
+    string inputFile = "";
+    string inputText = "";
 
-    std::cout << "Please enter filename:\n";
-    std::cin >> inputFile;
+    cout << "Please enter filename:\n";
+    cin >> inputFile;
 
-    bool fileExists = file_exists(inputFile);
-
-    if (fileExists == true) {
-        std::ifstream t(inputFile);
-        std::string str((std::istreambuf_iterator<char>(t)),
-            std::istreambuf_iterator<char>());
-        inputText = str;
-    }
-    else{
-        std::cout << "File does not exist\n";
-        std::cin >> inputFile;
-        return 0;
-    }
+    ifstream t(inputFile);
+    string str((std::istreambuf_iterator<char>(t)),
+    istreambuf_iterator<char>());
+    inputText = str;
 
     exploitable(inputText.c_str(), inputText.size());
-    std::cin >> inputText;
 
     return 0;
 }
