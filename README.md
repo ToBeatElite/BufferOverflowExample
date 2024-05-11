@@ -5,4 +5,4 @@ This project should be using in conjunction with the blog post [Basics of Exploi
 
 ---
 
-slighty modified and used as a template, to test gadgets for my own post
+slighty modified and used as a template, to test gadgets for my own post https://tobeatelite.ca/rop-techniques-for-controlling-cpu-registers-x64/
